@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -28,5 +31,29 @@ public class MainActivity extends AppCompatActivity {
         rvIdol.setLayoutManager(new LinearLayoutManager(this));
         ListIdolAdapter listIdolAdapter = new ListIdolAdapter(list);
         rvIdol.setAdapter(listIdolAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.about_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        setMode(item.getItemId());
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setMode(int selectedMode) {
+        switch (selectedMode){
+            case R.id.about:
+                break;
+        }
+    }
+
+    public void handleAbout(MenuItem item) {
+        Intent intent =  new Intent(this, AboutActivity.class);
+        startActivity(intent);
     }
 }

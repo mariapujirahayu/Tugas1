@@ -2,4 +2,10 @@
     <string name="app_name">Tugas1</string>
     <string name="heroes_name">Nama Idol</string>
     <string name="detail">Detail</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="maria_puji_rahayu">Maria Puji Rahayu</string>
+    <string name="mariapujir_gmail_com">mariapujir@gmail.com</string>
+    <string name="about">About</string>
 </resources>
