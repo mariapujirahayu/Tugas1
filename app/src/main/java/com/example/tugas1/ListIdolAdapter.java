@@ -3,6 +3,7 @@ package com.example.tugas1;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +17,14 @@ import java.util.ArrayList;
 
 public class ListIdolAdapter extends RecyclerView.Adapter<ListIdolAdapter.ListViewHolder> {
     private ArrayList<Idol> listIdol;
+    private OnItemClickCallback onItemClickCallback;
 
-    public ListIdolAdapter(ArrayList<Idol> list){
+    ListIdolAdapter(ArrayList<Idol> list){
         this.listIdol = list;
+    }
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback;
     }
 
     @NonNull
@@ -29,14 +35,23 @@ public class ListIdolAdapter extends RecyclerView.Adapter<ListIdolAdapter.ListVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ListViewHolder holder, int position) {
         Idol idol = listIdol.get(position);
+
         Glide.with(holder.itemView.getContext())
                 .load(idol.getPhoto())
                 .apply(new RequestOptions().override(55,55))
                 .into(holder.imgPhoto);
+
         holder.tvName.setText(idol.getName());
         holder.tvDetail.setText(idol.getDetail());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickCallback.onItemClicked(listIdol.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -48,11 +63,15 @@ public class ListIdolAdapter extends RecyclerView.Adapter<ListIdolAdapter.ListVi
         ImageView imgPhoto;
         TextView tvName, tvDetail;
 
-        public ListViewHolder(@NonNull View itemView) {
+        public ListViewHolder(View itemView) {
             super(itemView);
             imgPhoto = itemView.findViewById(R.id.img_item_photo);
             tvName = itemView.findViewById(R.id.tv_item_name);
             tvDetail = itemView.findViewById(R.id.tv_item_detail);
         }
+    }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(Idol data);
     }
 }
