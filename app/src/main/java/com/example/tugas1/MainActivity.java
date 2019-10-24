@@ -68,5 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showSelectedIdol(Idol idol){
         Toast.makeText(this,"Kamu memilih " + idol.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent =  new Intent(this, DetailActivity.class);
+        startActivity(intent);
     }
 }
